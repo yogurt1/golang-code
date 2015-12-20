@@ -1,13 +1,15 @@
 package main
-import ( "github.com/rthornton128/goncurses" )
+import ( gc "github.com/rthornton128/goncurses" )
 
 func main() {
-	s, err := gc.Init()
-    if err != nil {
-        log.Fatal("init:", err)
-    }
-    defer gc.End()
-    s.Move(5, 2)
-    s.Println("#)
-    s.GetChar()
+
+	stdscr, err := gc.Init()
+	if err != nil {
+		return
+	}
+	defer gc.End()
+
+	stdscr.Border(gc.ACS_VLINE, gc.ACS_VLINE, gc.ACS_HLINE, gc.ACS_HLINE,
+		gc.ACS_ULCORNER, gc.ACS_URCORNER, gc.ACS_LLCORNER, gc.ACS_LRCORNER)
+	stdscr.GetChar()
 }
